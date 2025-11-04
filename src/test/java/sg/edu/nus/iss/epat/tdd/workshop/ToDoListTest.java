@@ -4,10 +4,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class ToDoListTest  {
     // Define Test Fixtures
+
+    private ToDoList todolist;
 
     public ToDoListTest() {
         super();
@@ -15,31 +17,36 @@ public class ToDoListTest  {
 
     @Before
     public void setUp() throws Exception {
-        // Initialise Test Fixtures
+        todolist = new ToDoList();
+        todolist.addTask(new Task("Sample Task"));
     }
 
     @After
     public void tearDown() throws Exception {
-        // Uninitialise test Fixtures
+        todolist = null;
     }
 
     @Test
     public void testAddTask() {
-        fail("Not implemented yet");
+        assertEquals(1, todolist.getAllTasks().size());
     }
 
     @Test
     public void testGetStatus() {
-        fail("Not implemented yet");
+        assertEquals(false, todolist.getStatus("Sample Task"));
     }
 
     @Test
     public void testRemoveTask() {
-        fail("Not implemented yet");
+        assertEquals(1, todolist.getAllTasks().size());
+        todolist.removeTask("Sample Task");
+        assertEquals(0, todolist.getAllTasks().size());
     }
 
     @Test
     public void testGetCompletedTasks() {
-        fail("Not implemented yet");
+        todolist.completeTask("Sample Task");
+        assertEquals(1, todolist.getCompletedTasks().size());
+        assertTrue(todolist.getStatus("Sample Task"));
     }
 }
